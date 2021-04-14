@@ -10,7 +10,6 @@ const get = async wordId => {
 
 const search = async sString => {
   const word = await wordRepo.search(sString);
-
   return word;
 };
 
