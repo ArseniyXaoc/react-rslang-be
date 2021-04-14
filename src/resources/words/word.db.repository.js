@@ -16,4 +16,12 @@ const get = async id => {
   return word;
 };
 
-module.exports = { getAll, get };
+const search = async sString => {
+  const re = new RegExp(sString, 'i');
+  const words = await Word.find({
+    $or: [{ word: { $regex: re } }, { wordTranslate: { $regex: re } }]
+  });
+  return words;
+};
+
+module.exports = { getAll, get, search };

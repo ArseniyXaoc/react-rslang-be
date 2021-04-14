@@ -22,6 +22,15 @@ router.route('/').get(async (req, res) => {
   res.status(OK).send(words.map(word => word.toResponse()));
 });
 
+router.route('/search').get(async (req, res) => {
+  const sString = req.query.string.replace(/([{}()[\]\\/]+)/g, '');
+  if (sString.length > 0) {
+    const words = await wordService.search(sString);
+    res.status(OK).send(words.map(word => word.toResponse()));
+  }
+  res.status(400);
+});
+
 router.route('/:id').get(async (req, res) => {
   const word = await wordService.get(req.params.id);
   res.status(OK).send(word.toResponse());

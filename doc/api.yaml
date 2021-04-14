@@ -140,6 +140,29 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Word"
+  /words/search:
+    parameters:
+      - in: query
+        name: string
+        schema:
+          type: string
+        description: search string
+    get:
+      tags:
+        - Words
+      security:
+        []
+      summary: Search word
+      description: Search word by substring
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Word"
   /words/{id}:
     parameters:
       - name: id
